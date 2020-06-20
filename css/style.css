@@ -1,0 +1,42 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+@font-face {
+    font-family: 'Yekan';
+    src: url(../fonts/Yekan\ Bakh\ Medium.woff);
+}
+
+html {
+  font-size: 62.5%;
+  /* rem : 10px */
+  font-family: 'Yekan';
+}
+
+body {
+    box-sizing: border-box;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    border: 7px solid rgba(241, 196, 15, 0.5);
+    border-radius: 3.63rem;
+    margin: 40px 82px;
+}
+
+.header {
+    width: 100%;
+    border-radius: 3.63rem 3.63rem 0 0;
+    height: 70px;
+    box-shadow: 0px 0px 20px #b9b8b8;
+}
+
+.header__title {
+    font-size: 2.2rem;
+}
