@@ -1,3 +1,7 @@
+$(document).ready(() => {
+    $('.decrease').hide();
+})
+
 // Increase and Decrease buttons
 $(".increase").click(function () {
   let number = +$(this).parent().siblings(".number").text().toEnglishDigits();
@@ -34,33 +38,20 @@ $(".decrease").click(function () {
   let price = $(this).parent().parent().parent().children().children()[0].innerText;
   price = price.replace("/", "").toEnglishDigits();
   let sum = price * number;
-  sum = sum.toString().toPersianDigits();
-  sum = sum.split("");
-  sum.reverse().splice(3, 0, "/").reverse();
-  sum.reverse();
-  sum = sum.join("");
+  if (sum == 0) {
+    sum = sum.toString().toPersianDigits();
+  } else {
+    sum = sum.toString().toPersianDigits();
+    sum = sum.split("");
+    sum.reverse().splice(3, 0, "/").reverse();
+    sum.reverse();
+    sum = sum.join("");
+  }
 
   // Inset new sum
   let sumE = $(this).parent().parent().parent().siblings(".sum-div").children().children()[0];
   $(sumE).text(sum);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //////////////////////////////////////////////////////////////////
 /////////////////////////// Used methods//////////////////////////
