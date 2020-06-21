@@ -1,8 +1,31 @@
 $(document).ready(() => {
-    $('.decrease').hide();
-})
+  $(".decrease").hide();
+});
 
-// Increase and Decrease buttons
+//////////////////////////////////////////////////////////////////
+/////////////////////////// Used methods//////////////////////////
+//////////////////////////////////////////////////////////////////
+// Conver Persian numbers to English
+String.prototype.toEnglishDigits = function () {
+  return this.replace(/[۰-۹]/g, function (chr) {
+    var persian = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+    return persian.indexOf(chr);
+  });
+};
+
+// Conver English numbers to Persian
+String.prototype.toPersianDigits = function () {
+  return this.replace(/[0-9]/g, function (chr) {
+    var persian = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+    var English = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    return persian[English.indexOf(chr)];
+  });
+};
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+// Increase buttons
 $(".increase").click(function () {
   let number = +$(this).parent().siblings(".number").text().toEnglishDigits();
   number++;
@@ -24,8 +47,14 @@ $(".increase").click(function () {
   // Inset new sum
   let sumE = $(this).parent().parent().parent().siblings(".sum-div").children().children()[0];
   $(sumE).text(sum);
+
+  // Update bill
+  collectSum();
 });
 
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+// Decrease button
 $(".decrease").click(function () {
   let number = +$(this).parent().siblings(".number").text().toEnglishDigits();
   number--;
@@ -51,24 +80,45 @@ $(".decrease").click(function () {
   // Inset new sum
   let sumE = $(this).parent().parent().parent().siblings(".sum-div").children().children()[0];
   $(sumE).text(sum);
+
+  // Update bill
+  collectSum();
 });
 
-//////////////////////////////////////////////////////////////////
-/////////////////////////// Used methods//////////////////////////
-//////////////////////////////////////////////////////////////////
-// Conver Persian numbers to English
-String.prototype.toEnglishDigits = function () {
-  return this.replace(/[۰-۹]/g, function (chr) {
-    var persian = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-    return persian.indexOf(chr);
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+// Collect sum and wage calculation
+function collectSum() {
+  // Calculate sum
+  let result = 0;
+  let wage;
+  $(".foods__item").each(function () {
+    let cost = $(this).children()[2];
+    cost = $(cost).children()[0];
+    cost = $(cost).children()[0];
+    cost = +$(cost).text().replace("/", "").toEnglishDigits();
+    result += cost;
   });
-};
 
-// Conver English numbers to Persian
-String.prototype.toPersianDigits = function () {
-  return this.replace(/[0-9]/g, function (chr) {
-    var persian = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-    var English = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-    return persian[English.indexOf(chr)];
-  });
-};
+  // Calculate wage
+  wage = (result * 2.5) / 100;
+
+  // Insert wage and sum
+  if (result == 0) {
+    result = result.toString().toPersianDigits();
+    wage = wage.toString().toPersianDigits();
+  } else {
+    result = result.toString().toPersianDigits();
+    result = result.split("");
+    result.reverse().splice(3, 0, "/").reverse();
+    result.reverse();
+    result = result.join("");
+    wage = wage.toString().toPersianDigits();
+    wage = wage.split("");
+    wage.reverse().splice(3, 0, "/").reverse();
+    wage.reverse();
+    wage = wage.join("");
+  }
+  $("#wage").text(wage);
+  $("#collectOrders").text(result);
+}
