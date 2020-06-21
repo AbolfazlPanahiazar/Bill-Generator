@@ -51,6 +51,7 @@ $(".increase").click(function () {
 
   // Update bill
   collectSum();
+  finalCal();
 });
 
 ///////////////////////////////////////////////////////
@@ -84,6 +85,7 @@ $(".decrease").click(function () {
 
   // Update bill
   collectSum();
+  finalCal();
 });
 
 ///////////////////////////////////////////////////////
@@ -111,12 +113,12 @@ function collectSum() {
   } else {
     result = result.toString().toPersianDigits();
     result = result.split("");
-    result.reverse().splice(3, 0, "/").reverse();
+    if (result.length > 3) result.reverse().splice(3, 0, "/").reverse();
     result.reverse();
     result = result.join("");
     wage = wage.toString().toPersianDigits();
     wage = wage.split("");
-    wage.reverse().splice(3, 0, "/").reverse();
+    if (wage.length > 3) wage.reverse().splice(3, 0, "/").reverse();
     wage.reverse();
     wage = wage.join("");
   }
@@ -133,6 +135,7 @@ let value = 0;
 const Discounts = {
   aboli: 20000,
   hossein79: 10000,
+  Mamad123: 15000,
   "20darsad": "20%",
   "10darsad": "10%",
 };
@@ -198,25 +201,37 @@ $("#discount").click(function () {
 
 // Final price
 function finalCal() {
+  // Discount Cal.
   if (typeof value == "string") {
     let collect = +$("#collectOrders").text().toEnglishDigits().replace("/", "");
     let offVal = value.split("");
     offVal.pop();
     offVal = +offVal.join("");
-    console.log(collect);
-    // offVal = (collect * offVal) / 100;
-    // offVal = value.toString().toPersianDigits();
-    // offVal = offVal.split("");
-    // offVal.reverse().splice(3, 0, "/").reverse();
-    // offVal.reverse();
-    // offVal = offVal.join("");
-    // $("#off").text(offVal);
+    offVal = (collect * offVal) / 100;
+    offVal = offVal.toString().toPersianDigits();
+    offVal = offVal.split("");
+    if (offVal.length > 3) offVal.reverse().splice(3, 0, "/").reverse();
+    offVal.reverse();
+    offVal = offVal.join("");
+    $("#off").text(offVal);
   } else {
     let injectVal = value.toString().toPersianDigits();
     injectVal = injectVal.split("");
-    injectVal.reverse().splice(3, 0, "/").reverse();
+    if (injectVal.length > 3) injectVal.reverse().splice(3, 0, "/").reverse();
     injectVal.reverse();
     injectVal = injectVal.join("");
     $("#off").text(injectVal);
   }
+
+  // Final Cal
+  let final = 0;
+  final += +$("#collectOrders").text().toEnglishDigits().replace("/", "");
+  final += +$("#wage").text().toEnglishDigits().replace("/", "");
+  final -= +$("#off").text().toEnglishDigits().replace("/", "");
+  final = final.toString().toPersianDigits();
+  final = final.split("");
+  if (final.length > 3) final.reverse().splice(3, 0, "/").reverse();
+  final.reverse();
+  final = final.join("");
+  $('#final').text(final)
 }
