@@ -5,10 +5,13 @@
   padding: 0;
   box-sizing: inherit;
 }
-
+/* some stuff */
 @font-face {
     font-family: 'Yekan';
     src: url(../fonts/Yekan\ Bakh\ Medium.woff);
+}
+.text-orange {
+    color: #E74D3D;
 }
 
 html {
@@ -22,6 +25,7 @@ body {
     height: 100vh;
     display: flex;
     justify-content: center;
+    font-weight: bold;
 }
 
 .container {
@@ -43,6 +47,26 @@ body {
 
 .foods {
     height: 645px;
+    overflow-y: scroll;
+}
+.foods__item {
+    height: 20%;
+    border-bottom: solid 1.2px #c6c6c6;
+}
+.foods__item--text .name {
+    font-size: 1.74rem;
+}
+.foods .price {
+    font-size: 1.93rem;
+}
+.foods .tooman {
+    font-size: 1.4rem;
+}
+.foods__item--text .number {
+    font-size: 2.81rem;
+}
+.foods__item--text i {
+    font-size: 1.7rem;
 }
 
 .footer {
