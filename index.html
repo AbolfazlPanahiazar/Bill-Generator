@@ -180,7 +180,19 @@
       <!-- foods - end -->
 
       <!-- footer - start -->
-      <footer class="footer w-100 bg-primary"></footer>
+      <footer class="footer w-100 row m-0">
+        <!-- footer form - start -->
+        <div class="footer__form col-7 d-flex flex-column align-items-center justify-content-end">
+          <div class="footer__form--input w-100 rounded-pill d-flex align-items-center position-relative">
+            <input class="position-absolute w-100 h-100 rounded-pill pr-4" type="text" placeholder="کد تخفیف">
+            <button class="btn text-light rounded-circle text-center ml-1"><i class="fas fa-plus"></i></button>
+          </div>
+          <button class="footer__form--button w-100 text-light btn mt-4 mb-5">ثبت سفارش</button>
+        </div>
+        <!-- footer form - end -->
+
+        <div class="footer__texts col-5 bg-danger"></div>
+      </footer>
       <!-- footer - end -->
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
