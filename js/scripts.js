@@ -119,7 +119,6 @@ function collectSum() {
     wage = wage.toString().toPersianDigits();
     wage = wage.split("");
     if (wage.length > 3) wage.reverse().splice(3, 0, "/").reverse();
-    wage.reverse();
     wage = wage.join("");
   }
   $("#wage").text(wage);
