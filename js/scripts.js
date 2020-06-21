@@ -5,6 +5,7 @@ $(document).ready(() => {
 //////////////////////////////////////////////////////////////////
 /////////////////////////// Used methods//////////////////////////
 //////////////////////////////////////////////////////////////////
+
 // Conver Persian numbers to English
 String.prototype.toEnglishDigits = function () {
   return this.replace(/[۰-۹]/g, function (chr) {
@@ -121,4 +122,101 @@ function collectSum() {
   }
   $("#wage").text(wage);
   $("#collectOrders").text(result);
+}
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+// Discount stuff
+let used = 0;
+let isPercentage;
+let value = 0;
+const Discounts = {
+  aboli: 20000,
+  hossein79: 10000,
+  "20darsad": "20%",
+  "10darsad": "10%",
+};
+// 0 empty
+// 1 wrong
+// 2 used
+$("#discount").click(function () {
+  let buttonI = $(this).children()[0];
+  // --Empty state
+  if (used == 0) {
+    // Get the code
+    let code = $("#discountInput").val();
+    // Check for existance and if it was do the works
+    for (let key in Discounts) {
+      if (code == key) {
+        used = 2;
+        value = Discounts[code];
+        $(buttonI).removeClass("fa-plus");
+        $(buttonI).addClass("fa-trash");
+        $(this).css("background-color", "#E74C3C");
+        $("#discountInput").css("background-color", "#D9F6E6");
+      }
+    }
+    // Cheched and it was wrong
+    if (used != 2 && used == 0) {
+      used = 1;
+      value = 0;
+      $(buttonI).removeClass("fa-plus");
+      $(buttonI).addClass("fa-times");
+      $(this).css("background-color", "#E74C3C");
+      $("#discountInput").css("background-color", "#FBDFDC");
+      $("#discountInput").val("Wrong Code");
+      $("#discountInput").prop("disabled", true);
+    }
+  } else if (used == 1) {
+    // --Wrong state
+    used = 0;
+    value = 0;
+    $(buttonI).removeClass("fa-times");
+    $(buttonI).addClass("fa-plus");
+    $(this).css("background-color", "#F39C12");
+    $("#discountInput").css("background-color", "#FFFFFF");
+    $("#discountInput").prop("disabled", false);
+    $("#discountInput").val("");
+  } else if (used == 2) {
+    // --Used state
+    used = 0;
+    value = 0;
+    $(buttonI).removeClass("fa-trash");
+    $(buttonI).addClass("fa-plus");
+    $(this).css("background-color", "#F39C12");
+    $("#discountInput").css("background-color", "#FFFFFF");
+    $("#discountInput").prop("disabled", false);
+    $("#discountInput").val("");
+  }
+
+  // Final calculations
+  finalCal();
+});
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+// Final price
+function finalCal() {
+  if (typeof value == "string") {
+    let collect = +$("#collectOrders").text().toEnglishDigits().replace("/", "");
+    let offVal = value.split("");
+    offVal.pop();
+    offVal = +offVal.join("");
+    console.log(collect);
+    // offVal = (collect * offVal) / 100;
+    // offVal = value.toString().toPersianDigits();
+    // offVal = offVal.split("");
+    // offVal.reverse().splice(3, 0, "/").reverse();
+    // offVal.reverse();
+    // offVal = offVal.join("");
+    // $("#off").text(offVal);
+  } else {
+    let injectVal = value.toString().toPersianDigits();
+    injectVal = injectVal.split("");
+    injectVal.reverse().splice(3, 0, "/").reverse();
+    injectVal.reverse();
+    injectVal = injectVal.join("");
+    $("#off").text(injectVal);
+  }
 }
