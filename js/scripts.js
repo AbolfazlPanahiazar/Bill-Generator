@@ -118,7 +118,10 @@ function collectSum() {
     result = result.join("");
     wage = wage.toString().toPersianDigits();
     wage = wage.split("");
-    if (wage.length > 3) wage.reverse().splice(3, 0, "/").reverse();
+    if (wage.length > 3) {
+      wage.reverse().splice(3, 0, "/");
+      wage.reverse();
+    }
     wage = wage.join("");
   }
   $("#wage").text(wage);
@@ -156,6 +159,7 @@ $("#discount").click(function () {
         $(buttonI).addClass("fa-trash");
         $(this).css("background-color", "#E74C3C");
         $("#discountInput").css("background-color", "#D9F6E6");
+        $("#discountInput").prop("disabled", true);
       }
     }
     // Cheched and it was wrong
@@ -232,5 +236,5 @@ function finalCal() {
   if (final.length > 3) final.reverse().splice(3, 0, "/").reverse();
   final.reverse();
   final = final.join("");
-  $('#final').text(final)
+  $("#final").text(final);
 }
