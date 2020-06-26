@@ -93,7 +93,7 @@ body {
   border: none;
   text-align: right;
   font-size: 2rem;
-  color: #5E5655;
+  color: #5e5655;
   font-weight: bold;
 }
 .footer__form--input input::placeholder {
@@ -119,4 +119,32 @@ body {
 }
 .footer__texts--features .num {
   font-size: 2rem;
+}
+
+/********** loading **********/
+.loader {
+  z-index: 500;
+  position: fixed;
+  background-color: #14e4b3;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader img {
+  animation-name: rotate;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  50% {
+    transform: rotateZ(1080deg);
+  }
+  100% {
+    transform: rotateZ(1440deg);
+  }
 }

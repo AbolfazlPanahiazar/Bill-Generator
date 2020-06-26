@@ -1,3 +1,7 @@
+$(window).on("load", () => {
+  $(".loader").hide();
+});
+
 $(document).ready(() => {
   $(".decrease").hide();
 });

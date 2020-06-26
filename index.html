@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body class="d-flex justify-content-center">
+    <div class="loader">
+      <img src="./images/foodA.png" alt="loader" />
+    </div>
     <!--[if lt IE 7]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.
@@ -184,7 +187,7 @@
         <!-- footer form - start -->
         <div class="footer__form col-7 d-flex flex-column align-items-center justify-content-end">
           <div class="footer__form--input w-100 rounded-pill d-flex align-items-center position-relative">
-            <input id="discountInput" class="position-absolute w-100 h-100 rounded-pill pr-4" type="text" placeholder="کد تخفیف">
+            <input id="discountInput" class="position-absolute w-100 h-100 rounded-pill pr-4" type="text" placeholder="کد تخفیف" />
             <button id="discount" class="btn text-light rounded-circle text-center ml-1"><i class="fas fa-plus"></i></button>
           </div>
           <button class="footer__form--button w-100 text-light btn mt-4 mb-5">ثبت سفارش</button>
@@ -194,7 +197,6 @@
         <!-- footer text - start -->
         <div class="footer__texts col-5">
           <table class="footer__texts--features w-100">
-
             <tr>
               <td class="pr-1">تومان</td>
               <td id="collectOrders" class="num pr-4 py-2">۰</td>
