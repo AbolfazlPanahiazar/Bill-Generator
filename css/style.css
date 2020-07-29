@@ -27,6 +27,7 @@ body {
   display: flex;
   justify-content: center;
   font-weight: bold;
+  margin: 0 auto;
 }
 
 .container {
